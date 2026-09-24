@@ -82,7 +82,7 @@ button:focus-visible,input:focus-visible,.vp:focus-visible{outline:2px solid var
 .vline{position:absolute;top:0;bottom:0;width:2px;z-index:2;pointer-events:none}
 .vline.christ{background:var(--christ);opacity:.75}
 .vline.today{background:var(--muted);opacity:.5;width:1px}
-.vline b{position:absolute;top:56px;left:6px;font-family:Lora,Georgia,serif;font-size:12px;font-weight:600;white-space:nowrap;color:var(--christ);background:var(--paper);padding:0 4px;border-radius:3px}
+.vline b{position:absolute;bottom:6px;left:6px;font-family:Lora,Georgia,serif;font-size:12px;font-weight:600;white-space:nowrap;color:var(--christ);background:var(--paper);padding:0 4px;border-radius:3px}
 .vline.today b{color:var(--muted);font-weight:500}
 
 aside.detail{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:min(440px,calc(100% - 40px));max-height:min(72vh,620px);overflow-y:auto;overscroll-behavior:contain;background:var(--paper);border:1px solid var(--rule);border-top:5px solid var(--c);border-radius:12px;padding:16px 18px 18px;box-shadow:0 12px 40px rgba(10,20,30,.18);z-index:20;display:none}
@@ -107,8 +107,51 @@ section.below{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);g
 .note{font-size:13px;color:var(--muted);border-left:3px solid var(--rule);padding-left:12px;margin-top:14px}
 .theme{margin-left:auto}
 
+.views{display:inline-flex;margin-top:18px;border:1px solid var(--rule);border-radius:999px;padding:3px;background:var(--paper)}
+.vbtn{font:inherit;font-size:14px;font-weight:500;border:0;background:none;color:var(--muted);padding:6px 18px;border-radius:999px;cursor:pointer;min-height:36px}
+.vbtn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.lab .sh{display:none}
+.hint{display:none;font-size:12.5px;color:var(--muted);margin:8px 2px 0}
+.list{max-width:820px}
+.list section{margin-top:18px}
+.list h3{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;margin:0;padding:10px 2px 8px;background:var(--bg);font-family:Lora,Georgia,serif;font-size:19px;font-weight:600;border-bottom:1px solid var(--rule)}
+.list h3 small{font-family:"Be Vietnam Pro",system-ui,sans-serif;font-size:12.5px;font-weight:400;color:var(--muted);margin-left:8px}
+.list details{position:relative;border-left:3px solid var(--c);background:var(--paper);border-radius:0 10px 10px 0;margin:8px 0;padding:0}
+.list summary{list-style:none;cursor:pointer;padding:10px 40px 10px 14px;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline}
+.list summary::-webkit-details-marker{display:none}
+.list summary::after{content:"+";position:absolute;right:14px;top:10px;font-size:20px;line-height:1;color:var(--muted)}
+.list details[open] summary::after{content:"−"}
+.list .yr{grid-row:span 2;font-weight:600;font-size:13px;color:var(--c);min-width:62px;font-variant-numeric:tabular-nums}
+.list .tt{font-weight:600;font-size:15px;line-height:1.35}
+.list .ln{font-size:12px;color:var(--muted)}
+.list .bd{padding:0 16px 14px 14px;font-size:14.5px;line-height:1.65}
+.list .bd p{margin:0}
+.list .bd .dt2{font-size:13px;color:var(--muted);margin-bottom:6px}
+.list .sig{margin-top:10px;padding:10px 12px;border-radius:8px;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.list .sig h4{margin:0 0 4px;font-family:Lora,Georgia,serif;font-size:14px;color:var(--c)}
+.list mark{background:color-mix(in srgb,var(--c) 25%,transparent);color:inherit;border-radius:2px}
+.empty{color:var(--muted);padding:20px 0}
+body.listmode #zoomgrp,body.listmode .vp,body.listmode .hint{display:none!important}
+.vp{touch-action:pan-x pan-y}
+
 @media (max-width:760px){
   :root{--labw:84px}
+  header h1{font-size:28px}
+  header p{font-size:14px}
+  .views{display:flex;width:100%}
+  .vbtn{flex:1}
+  .tools{gap:10px;margin-top:14px}
+  .search{flex:1 1 100%;max-width:none}
+  .search input{font-size:16px;padding:9px 12px}
+  .chips,.eras{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-left:-12px;margin-right:-12px;padding:2px 12px}
+  .chips::-webkit-scrollbar,.eras::-webkit-scrollbar{display:none}
+  .chip,.era-chip{flex:none;min-height:34px}
+  .chips{order:3;width:calc(100% + 24px)}
+  .theme{order:5}
+  .lab .lg{display:none}
+  .lab .sh{display:block}
+  .hint{display:block}
+  .list .yr{min-width:54px}
   .wrap{padding:18px 12px 40px}
   .lab{padding:8px 8px;font-size:12px}
   .lab small{display:none}
@@ -123,11 +166,15 @@ section.below{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);g
 <div class="wrap">
 <header>
   <h1>Lược sử Giáo hội Công giáo Rôma</h1>
-  <p>Từ Lễ Ngũ Tuần đến Đức Giáo hoàng Lêô XIV, trình bày thành sáu dải song song theo lối sơ đồ lịch sử cứu độ. Bấm vào từng mốc để đọc giải thích; phóng to để hiện thêm chi tiết.</p>
+  <p>Từ Lễ Ngũ Tuần đến Đức Giáo hoàng Lêô XIV, trình bày thành sáu dải song song theo lối sơ đồ lịch sử cứu độ. Xem dạng sơ đồ để thấy các sự kiện diễn ra song song, hoặc dạng danh sách để đọc lần lượt theo thời gian.</p>
 </header>
 
+<div class="views" role="group" aria-label="Chọn cách xem">
+  <button class="vbtn" id="vChart" aria-pressed="true">Sơ đồ</button>
+  <button class="vbtn" id="vList" aria-pressed="false">Danh sách</button>
+</div>
 <div class="tools">
-  <div class="zoom" role="group" aria-label="Thu phóng">
+  <div class="zoom" id="zoomgrp" role="group" aria-label="Thu phóng">
     <button id="zout" aria-label="Thu nhỏ">−</button>
     <input id="zr" type="range" min="0" max="100" value="29" aria-label="Mức thu phóng">
     <button id="zin" aria-label="Phóng to">+</button>
@@ -142,6 +189,8 @@ section.below{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);g
 <div class="vp" id="vp" tabindex="0" aria-label="Sơ đồ thời gian, cuộn ngang để xem">
   <div class="canvas" id="cv"></div>
 </div>
+<p class="hint" id="hint">Vuốt ngang để xem các thế kỷ; chụm hai ngón tay để phóng to, thu nhỏ.</p>
+<div class="list" id="list" hidden></div>
 
 <section class="below">
   <div>
@@ -419,7 +468,7 @@ function render(){
   LANES.forEach(L=>{
     if(!laneOn[L.id])return;
     const color='var(--'+L.id+')';
-    const[r,tr]=row('lane','<i></i><span>'+L.name+'<small>'+L.sub+'</small></span>',color);
+    const[r,tr]=row('lane','<i></i><span class="lg">'+L.name+'<small>'+L.sub+'</small></span><span class="sh">'+L.short+'</span>',color);
     const items=D.filter(d=>d.l===L.id);total+=items.length;
     const vis=items.filter(visible).sort((a,b)=>a.s-b.s||(b.e||b.s)-(a.e||a.s));
     const ends=[];
@@ -479,20 +528,74 @@ document.getElementById('zout').onclick=()=>setZoom(ppy/1.4);
 document.getElementById('zr').oninput=e=>setZoom(MINZ*Math.pow(MAXZ/MINZ,e.target.value/100));
 vp.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey){e.preventDefault();setZoom(ppy*(e.deltaY<0?1.15:1/1.15))}},{passive:false});
 const q=document.getElementById('q');
-q.addEventListener('input',()=>{query=norm(q.value.trim());render()});
-q.addEventListener('keydown',e=>{if(e.key==='Enter'&&query){const m=D.filter(d=>laneOn[d.l]&&d.n.includes(query)).sort((a,b)=>a.s-b.s)[0];if(m){scrollToYear(m.s,true);openDetail(m)}}});
+q.addEventListener('input',()=>{query=norm(q.value.trim());refresh()});
+q.addEventListener('keydown',e=>{if(e.key==='Enter'){q.blur()}if(e.key==='Enter'&&query&&view==='chart'){const m=D.filter(d=>laneOn[d.l]&&d.n.includes(query)).sort((a,b)=>a.s-b.s)[0];if(m){scrollToYear(m.s,true);openDetail(m)}}});
 document.getElementById('dx').onclick=closeDetail;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
 const lc=document.getElementById('lanechips');
 LANES.forEach(L=>{const b=el('button','chip','<i></i>'+L.short);b.style.setProperty('--c','var(--'+L.id+')');b.setAttribute('aria-pressed','true');
-  b.onclick=()=>{laneOn[L.id]=!laneOn[L.id];b.setAttribute('aria-pressed',String(laneOn[L.id]));const cy=centerYear();render();scrollToYear(cy,false)};lc.append(b)});
+  b.onclick=()=>{laneOn[L.id]=!laneOn[L.id];b.setAttribute('aria-pressed',String(laneOn[L.id]));refresh()};lc.append(b)});
 const ec=document.getElementById('erachips');
-ERAS.forEach(([a,b,n])=>{const c=el('button','era-chip',n);c.onclick=()=>scrollToYear((a+Math.min(b,TODAY))/2,true);ec.append(c)});
+ERAS.forEach(([a,b,n])=>{const c=el('button','era-chip',n);c.onclick=()=>{if(view==='list'){const i=ERAS.findIndex(x=>x[0]===a);const s=document.getElementById('era-'+i);if(s)s.scrollIntoView({behavior:'smooth',block:'start'})}else scrollToYear((a+Math.min(b,TODAY))/2,true)};ec.append(c)});
 document.getElementById('theme').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
-let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{const cy=centerYear();render();scrollToYear(cy,false)},150)});
+let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(view==='chart'){const cy=centerYear();render();scrollToYear(cy,false)}},150)});
 
-render();scrollToYear(250,false);
-(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{const cy=centerYear();render();scrollToYear(cy,false)});
+// ===== Dạng danh sách =====
+let view='chart';
+const listEl=document.getElementById('list');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function hl(s){
+  if(!query)return esc(s);
+  // tô sáng khớp không phân biệt dấu
+  const n=norm(s);let out='',i=0,k;
+  while((k=n.indexOf(query,i))>-1&&query){out+=esc(s.slice(i,k))+'<mark>'+esc(s.slice(k,k+query.length))+'</mark>';i=k+query.length}
+  return out+esc(s.slice(i));
+}
+const dateOf=d=>d.d||(d.e?fmtY(d.s)+'–'+fmtY(d.e):fmtY(d.s));
+const shortYear=d=>d.s<0?(-d.s)+' TCN':String(Math.floor(d.s));
+function renderList(){
+  const items=D.filter(d=>laneOn[d.l]&&(!query||d.n.includes(query))).sort((a,b)=>a.s-b.s||LANES.findIndex(l=>l.id===a.l)-LANES.findIndex(l=>l.id===b.l));
+  listEl.innerHTML='';
+  if(!items.length){listEl.append(el('p','empty','Không có mốc nào khớp. Hãy thử từ khóa khác hoặc bật thêm các dải ở trên.'));}
+  const eraOf=y=>{const i=ERAS.findIndex(([a,b])=>y<b);return i<0?ERAS.length-1:(y<ERAS[0][0]?-1:i)};
+  let cur=null,sec=null;
+  items.forEach(d=>{
+    const ei=eraOf(d.s);
+    if(ei!==cur){cur=ei;sec=el('section');sec.id='era-'+ei;
+      const title=ei<0?'Trước thời Tông đồ':ERAS[ei][2];
+      const range=ei<0?'':(ERAS[ei][0]+' – '+(ERAS[ei][1]===END?'nay':ERAS[ei][1]));
+      sec.append(el('h3','',esc(title)+(range?'<small>'+range+'</small>':'')));listEl.append(sec)}
+    const L=LANES.find(l=>l.id===d.l);
+    const det=el('details');det.style.setProperty('--c','var(--'+d.l+')');
+    if(query)det.open=true;
+    det.innerHTML='<summary><span class="yr">'+shortYear(d)+'</span><span class="tt">'+hl(d.t)+'</span><span class="ln">'+esc(L.name)+'</span></summary>'
+      +'<div class="bd"><div class="dt2">'+esc(dateOf(d))+'</div><p>'+hl(d.x)+'</p>'
+      +(d.y?'<div class="sig"><h4>Ý nghĩa</h4><p>'+hl(d.y)+'</p></div>':'')+'</div>';
+    sec.append(det);
+  });
+  document.getElementById('status').textContent=query?(items.length+' mốc khớp với từ khóa.'):('Đang hiện '+items.length+' mốc theo thứ tự thời gian. Chạm vào từng mốc để đọc chi tiết.');
+}
+function refresh(){if(view==='list')renderList();else{const cy=centerYear();render();scrollToYear(cy,false)}}
+function setView(v){
+  view=v;document.body.classList.toggle('listmode',v==='list');listEl.hidden=v!=='list';
+  document.getElementById('vChart').setAttribute('aria-pressed',String(v==='chart'));
+  document.getElementById('vList').setAttribute('aria-pressed',String(v==='list'));
+  closeDetail();
+  if(v==='list')renderList();else{render();scrollToYear(250,false)}
+}
+document.getElementById('vChart').onclick=()=>setView('chart');
+document.getElementById('vList').onclick=()=>setView('list');
+
+// chụm hai ngón để phóng to trên màn hình cảm ứng
+let pinch=null,raf=0;
+const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+vp.addEventListener('touchstart',e=>{if(e.touches.length===2)pinch={d:dist(e.touches),z:ppy}},{passive:true});
+vp.addEventListener('touchmove',e=>{if(pinch&&e.touches.length===2){e.preventDefault();const z=pinch.z*dist(e.touches)/pinch.d;cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>setZoom(z))}},{passive:false});
+vp.addEventListener('touchend',e=>{if(e.touches.length<2)pinch=null},{passive:true});
+
+// khởi động: điện thoại mặc định xem danh sách, máy tính xem sơ đồ
+if(matchMedia('(max-width:760px)').matches){ppy=0.9;setView('list')}else{setView('chart')}
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{if(view==='chart'){const cy=centerYear();render();scrollToYear(cy,false)}});
 </script>
 </body>
 </html>
